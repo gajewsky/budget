@@ -1,0 +1,13 @@
+%header.main-header
+  = link_to dashboard_index_path, class: 'logo' do
+    %span.logo-mini
+      %b> C
+    %span.logo-lg
+      %b> Calincome
+  %nav.navbar.navbar-static-top{:role => "navigation"}
+    %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
+      %span.sr-only Toggle navigation
+    .navbar-custom-menu
+      %ul.nav.navbar-nav
+        - if user_signed_in?
+          = render partial: 'layouts/user_menu'

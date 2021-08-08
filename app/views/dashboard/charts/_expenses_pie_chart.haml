@@ -1,0 +1,71 @@
+.box
+  .box-tools.pull-right
+    %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+      %i.fa.fa-minus
+    %button.btn.btn-box-tool{ data: { widget: 'remove' }, type: 'button' }
+      %i.fa.fa-times
+
+  .box-body
+    #pie-chart{ style: 'width: 100%;'}
+
+:javascript
+  $(function () {
+      var colors = Highcharts.getOptions().colors,
+          categories = #{raw categories_titles(expenses)},
+          data = #{raw expense_for_chart(expenses)},
+          categoriesData = [],
+          subcategoriesData = [],
+          i,
+          j,
+          drillDataLen,
+          brightness;
+
+      for (i = 0; i < data.length; i += 1) {
+        categoriesData.push({
+            name: categories[i],
+            y: data[i].expenses,
+            color: colors[i]
+        });
+
+          drillDataLen = data[i].drilldown.data.length;
+          for (j = 0; j < drillDataLen; j += 1) {
+              brightness = 0.2 - (j / drillDataLen) / 5;
+              subcategoriesData.push({
+                  name: data[i].drilldown.categories[j],
+                  y: data[i].drilldown.data[j],
+                  color: Highcharts.Color(colors[i]).brighten(brightness).get()
+              });
+          }
+      }
+
+      $('#pie-chart').highcharts({
+          chart: { type: 'pie'},
+          title: { text: false },
+          yAxis: { title: { text: 'Total percent market share' } },
+          plotOptions: { pie: { shadow: false, center: ['50%', '50%'] } },
+          tooltip: { valueSuffix: 'zł' },
+          series: [{
+              name: 'Expenses',
+              data: categoriesData,
+              size: '65%',
+              dataLabels: {
+                  formatter: function () {
+                      return this.y > 5 ? this.point.name : null;
+                  },
+                  color: '#ffffff',
+                  distance: -30
+              }
+          }, {
+              name: 'Expenses',
+              data: subcategoriesData,
+              size: '100%',
+              innerSize: '65%',
+              dataLabels: {
+                  formatter: function () {
+                      // display only if larger than 1
+                      return this.y > 1 ? '<b>' + this.point.name + ':</b> ' + this.y + 'zł' : null;
+                  }
+              }
+          }]
+      });
+  });

@@ -1,0 +1,87 @@
+.box
+  .box-tools.pull-right
+    %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+      %i.fa.fa-minus
+    %button.btn.btn-box-tool{ data: { widget: 'remove' }, type: 'button' }
+      %i.fa.fa-times
+
+  .box-body
+    #line-and-column{ style: 'width: 100%;'}
+
+:javascript
+  $(function () {
+    var data_hash = #{raw data_hash.to_a},
+        sums_by_month = #{raw sums_by_month(data_hash)},
+        categories = #{raw data_hash.keys},
+        colors = Highcharts.getOptions().colors
+
+      $('#line-and-column').highcharts({
+        chart: {
+          zoomType: 'xy'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: [{
+            categories: categories,
+            crosshair: true
+        }],
+        yAxis: [{
+            labels: {
+                format: '{value}zł',
+                style: {
+                    color: colors[1]
+                }
+            },
+            title: {
+                text: 'Sum',
+                style: {
+                    color: colors[1]
+                }
+            }
+        }, {
+            title: {
+                text: 'Operation',
+                style: {
+                    color: colors[0]
+                }
+            },
+            labels: {
+                format: '{value} zł',
+                style: {
+                    color: colors[0]
+                }
+            },
+            opposite: true
+        }],
+        tooltip: {
+            shared: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 120,
+            verticalAlign: 'top',
+            y: 100,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: 'Operation',
+            type: 'column',
+            yAxis: 1,
+            data: data_hash,
+            tooltip: {
+                valueSuffix: 'zł'
+            }
+
+        }, {
+            name: 'Total',
+            type: 'spline',
+            data: sums_by_month,
+            tooltip: {
+                valueSuffix: 'zł'
+            }
+        }]
+      });
+  });

@@ -1,0 +1,1 @@
+$('#summary').html('#{escape_javascript(render(partial: 'summary', locals: { incomes: @incomes, expenses: @expenses, expenses_by_day: @expenses_by_day, bills: @bills, average_spent_per_day: @average_spent_per_day }))}')

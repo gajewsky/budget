@@ -1,0 +1,35 @@
+.box-body.table-responsive.no-padding
+  %table.table.table-sm.table-hover
+    %thead
+      %tr
+        %th User
+        %th
+        %th Value
+        %th.col-sm-1 Contractor
+        %th.col-sm-3 Categories
+        %th.col-sm-4 Description
+
+        %th.col-sm-2 Tags
+        %th.col-sm-1 Date
+        %th.col-sm-1
+    %tbody
+      - bills.each do |bill|
+        %tr
+          %td= image_tag(bill.user.avatar || 'no-avatar.jpg', height: '22', width: '22', class: 'img-circle')
+          %td= "\u2713" if bill.to_divide
+          %td.col-sm-1= number_to_currency(bill.value, unit: 'zł', format: '%n %u')
+          %td.col-sm-1= link_to truncate(bill.contractor.name, length: 15), contractor_path(bill.contractor) if bill.contractor
+          %td.col-sm-3
+            %ul.list-inline
+              - bill.expenses.flat_map(&:subcategory).each do |subcategory|
+                %li
+                  = link_to category_label(subcategory), subcategory_path(subcategory)
+          %td.col-sm-4
+            = bill.expenses.pluck(:description).reject(&:blank?).join(', ')
+          %td.col-sm-2= raw bill.tag_list.uniq.map { |t| link_to t, tag_path(t) }.join(', ')
+          %td= l bill.operation_date
+          %td
+            = link_to edit_bill_path(bill), class: 'btn btn-xs btn-warning', title: 'Edit', rel: 'tooltip' do
+              %i.fa.fa-pencil-square-o
+            = link_to bill_path(bill), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', title: 'Remove', rel: 'tooltip' do
+              %i.fa.fa-trash

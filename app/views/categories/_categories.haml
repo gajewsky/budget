@@ -1,0 +1,22 @@
+.box-body.table-responsive.no-padding
+  %table.table.table-sm.table-hover
+    %thead
+      %tr
+        %th Title
+        %th Description
+        %th Subcategories
+        %th
+    %tbody
+      - categories.each do |category|
+        %tr
+          %td= category.title
+          %td= category.description
+          %td
+            %ul.list-inline
+              - category.subcategories.each do |subcategory|
+                %li= link_to subcategory.title, subcategory_path(subcategory)
+          %td
+            = link_to edit_category_path(category), class: 'btn btn-xs btn-warning',title: 'Edit', rel: 'tooltip' do
+              %i.fa.fa-pencil-square-o
+            = link_to category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', title: 'Remove', rel: 'tooltip' do
+              %i.fa.fa-trash

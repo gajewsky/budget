@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    = favicon_link_tag 'favicon.png'
+    %meta{ content: "#000000", name: "theme-color"}/
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
+    %title Calincome
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport'}/
+
+  %body.hold-transition.skin-green.sidebar-mini
+    .wrapper
+      = render partial: 'layouts/header'
+      - if user_signed_in?
+        = render partial: 'layouts/sidebar'
+        .content-wrapper
+          - flash.each do |key, value|
+            %div{ class: "#{flash_class(key)}" }
+              = value
+          = yield
+      - else
+        = yield
+    = render partial: 'layouts/footer'
