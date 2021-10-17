@@ -25,7 +25,7 @@ class BillsController < ApplicationController
 
   def update
     if @bill.update(bill_params)
-      redirect_to bills_url, notice: 'Bill was successfully updated.'
+      redirect_back fallback_location: bills_url, notice: 'Bill was successfully updated.'
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class BillsController < ApplicationController
 
   def destroy
     @bill.destroy
-    redirect_to bills_url, notice: 'Bill was successfully destroyed.'
+    redirect_back fallback_location: bills_url, notice: 'Bill was successfully destroyed.'
   end
 
   private
