@@ -50,7 +50,7 @@ group :test do
   gem 'rspec-rails'
 end
 
-source 'https://rails-assets.org' do
+source 'http://insecure.rails-assets.org' do
   gem 'rails-assets-adminlte'
   gem 'rails-assets-bootstrap-daterangepicker'
   gem 'rails-assets-bootstrap-tokenfield'

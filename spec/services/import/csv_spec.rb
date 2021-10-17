@@ -13,8 +13,8 @@ RSpec.describe Import::Csv do
 
   it 'creates bill and associated expense for user' do
     expect { subject }
-      .to change { user.bills.count }.from(0).to(6)
-      .and change { user.expenses.count }.from(0).to(6)
+      .to change { user.bills.count }.from(0).to(4)
+      .and change { user.expenses.count }.from(0).to(4)
   end
 end
 

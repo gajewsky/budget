@@ -7,10 +7,18 @@ module Import
     end
 
     def call
-      content.map { |row| ParseRow.new(row).call }.compact
+      expense_rows.map { |row| ParseRow.new(row).call }.compact
     end
 
     private
+
+    def expense_rows
+      expense_types = %w[CARD_PAYMENT TRANSFER]
+
+      content.keep_if do |row|
+        expense_types.include?(row[:type]) && row[:state] == 'COMPLETED'
+      end
+    end
 
     attr_reader :content
 
@@ -20,8 +28,6 @@ module Import
       end
 
       def call
-        return if not_valid_row?
-
         {
           bill_attrs: bill_attrs,
           expenses_attrs: [expense_attrs]
@@ -31,19 +37,6 @@ module Import
       private
 
       attr_reader :row
-
-      IGNORED_CONTRACTORS = [
-        'Top-Up',
-        'To CB PAYMENTS',
-        'To Crypto',
-        'Cash at',
-        'Exchange',
-        'To Base'
-      ].freeze
-
-      def not_valid_row?
-        row[:"paid_out_(pln)"].nil? || row[:description].start_with?(*IGNORED_CONTRACTORS)
-      end
 
       def bill_attrs
         {
@@ -55,14 +48,14 @@ module Import
       def expense_attrs
         {
           description: description,
-          value: row[:"paid_out_(pln)"],
+          value: row[:amount].abs,
           subcategory_id: subcategory_id,
           tag_list: ['revolut']
         }
       end
 
       def operation_date
-        @operation_date ||= Date.parse(row[:completed_date]).to_s
+        @operation_date ||= Time.parse(row[:started_date])
       end
 
       def contractor
@@ -79,7 +72,11 @@ module Import
       end
 
       def description
-        "#{row[:description]} - #{row[:category]} - #{row[:notes]}"
+        %(
+          #{row[:description]}
+          #{row[:category]}
+          #{row[:notes]}
+        )
       end
     end
   end

@@ -26,7 +26,7 @@ module Import
     end
 
     def parsed_csv
-      @parsed_csv ||= SmarterCSV.process(filepath, col_sep: ';')
+      @parsed_csv ||= SmarterCSV.process(filepath, col_sep: ',')
     end
   end
 end

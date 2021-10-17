@@ -7,16 +7,22 @@ RSpec.describe Import::RevolutAdapter do
 
   let(:user) { create :user }
   let(:description) { 'Description' }
+  let(:type) { 'CARD_PAYMENT' }
 
   let!(:revolut_subcategory) { create :subcategory, title: 'Revolut' }
   let(:content) do
     [
       {
-        completed_date: 'Aug 9, 2019',
+        type: type,
+        product: 'Current',
+        started_date: '2021-09-25 13:49:44',
+        completed_date: '2021-09-27 11:52:14',
         description: description,
-        "paid_out_(pln)": 63.0,
-        "balance_(pln)": 636.31,
-        category: 'restaurants',
+        amount: -85.76,
+        fee: 0.0,
+        currency: 'PLN',
+        state: 'COMPLETED',
+        balance: 3153.56,
         notes: 'some notes'
       }
     ]
@@ -27,15 +33,15 @@ RSpec.describe Import::RevolutAdapter do
       {
         bill_attrs: {
           contractor_id: expected_contractor_id,
-          operation_date: '2019-08-09'
+          operation_date: '2021-09-25 13:49:44 +0200'.to_time
         },
 
         expenses_attrs: [
           {
-            description: "#{description} - restaurants - some notes",
+            description: "\n          #{description}\n          \n          some notes\n        ",
             subcategory_id: expected_subcategory_id,
             tag_list: ['revolut'],
-            value: 63.0
+            value: 85.76
           }
         ]
       }
@@ -43,24 +49,8 @@ RSpec.describe Import::RevolutAdapter do
   end
 
 
-  context 'when contractor is on ignored list' do
-    let(:description) { 'Cash at' }
-
-    it 'omits expense' do
-      expect(subject).to eq []
-    end
-  end
-
-  context 'when there is no paid value' do
-    let(:content) do
-      [
-        {
-          completed_date: 'Aug 9, 2019',
-          description: description,
-          "paid_in_(pln)": 63.0,
-        }
-      ]
-    end
+  context 'when type is not accepted' do
+    let(:type) { 'Cash at' }
 
     it 'omits expense' do
       expect(subject).to eq []
@@ -100,7 +90,6 @@ RSpec.describe Import::RevolutAdapter do
       end
     end
   end
-
 
   context 'when it has unknown contractor not existing in db' do
     let(:expected_contractor_id) { nil }
