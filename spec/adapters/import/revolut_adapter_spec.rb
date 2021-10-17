@@ -38,7 +38,7 @@ RSpec.describe Import::RevolutAdapter do
 
         expenses_attrs: [
           {
-            description: "\n          #{description}\n          \n          some notes\n        ",
+            description: "#{description}\n          \n          some notes",
             subcategory_id: expected_subcategory_id,
             tag_list: ['revolut'],
             value: 85.76

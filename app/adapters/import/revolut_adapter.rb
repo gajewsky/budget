@@ -72,11 +72,9 @@ module Import
       end
 
       def description
-        %(
-          #{row[:description]}
+        %(#{row[:description]}
           #{row[:category]}
-          #{row[:notes]}
-        )
+          #{row[:notes]}).strip
       end
     end
   end
