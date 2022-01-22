@@ -1,50 +1,115 @@
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
-  DisplayCopNames: true
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 3.1.0
+  TargetRailsVersion: 7.0.1
+  DisabledByDefault: true
   Exclude:
-    - bin/**/*
-    - db/**/*
-    - .gemspec/**/*
-    - .bundle/**/*
-    - vendor/**/*
-    - config/**/*
-    - script/**/*
-    - spec/**/*
-    - node_modules/**/*
-    - tmp/**/*
-    - '**/Capfile'
+    - "bin/**/*"
+    - "vendor/**/*"
+    - "public/**/*"
+    - "node_modules/**/*"
 
-  Include:
-    - '**/gems.rb'
-    - '**/Rakefile'
-    - '**/config.ru'
-    - lib/tasks/**/*.rake
-    - lib/tasks/**/*.rb
+Bundler:
+  Enabled: true
 
-Metrics/ClassLength:
-  CountComments: false
-  Max: 200
-Metrics/LineLength:
-  Max: 99
-Metrics/MethodLength:
-  CountComments: false
-  Max: 15
-Metrics/AbcSize:
-  Max: 25
-Layout/MultilineOperationIndentation:
-  EnforcedStyle: indented
+Layout/EmptyLineAfterMagicComment:
+  Enabled: true
+Layout/TrailingEmptyLines:
+  Enabled: true
+Layout/TrailingWhitespace:
+  Enabled: true
 
-AlignParameters:
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: true
+Lint/CircularArgumentReference:
+  Enabled: true
+Lint/Debugger:
+  Enabled: true
+Lint/DeprecatedClassMethods:
+  Enabled: true
+Lint/DuplicateMethods:
   Enabled: false
-Bundler/OrderedGems:
+Lint/DuplicateHashKey:
+  Enabled: true
+Lint/EachWithObjectArgument:
+  Enabled: true
+Lint/ElseLayout:
+  Enabled: true
+Lint/EmptyEnsure:
+  Enabled: true
+Lint/EmptyInterpolation:
+  Enabled: true
+Lint/EnsureReturn:
+  Enabled: true
+Lint/FloatOutOfRange:
+  Enabled: true
+Lint/FormatParameterMismatch:
+  Enabled: true
+Lint/LiteralAsCondition:
+  Enabled: true
+Lint/LiteralInInterpolation:
+  Enabled: true
+Lint/Loop:
+  Enabled: true
+Lint/NextWithoutAccumulator:
+  Enabled: true
+Lint/RandOne:
+  Enabled: true
+Lint/RequireParentheses:
+  Enabled: true
+Lint/RescueException:
+  Enabled: true
+Lint/RedundantStringCoercion:
   Enabled: false
-Gemspec/OrderedDependencies:
+Lint/RedundantCopDisableDirective:
+  Enabled: true
+Lint/RedundantSplatExpansion:
   Enabled: false
-Style/Alias:
-  Enabled: false
-Style/FrozenStringLiteralComment:
-  Enabled: false
-Style/Documentation:
-  Enabled: false
+Lint/UnreachableCode:
+  Enabled: true
+Lint/UselessSetterCall:
+  Enabled: true
+Lint/Void:
+  Enabled: true
+
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+# Security/Eval:
+#   Enabled: false
+# Security/JSONLoad:
+#   Enabled: true
+# Security/MarshalLoad:
+#   Enabled: true
+# Security/Open:
+#   Enabled: false
+# Security/YAMLLoad:
+#   Enabled: false
+
+# Style/EndBlock:
+#   Enabled: true
+# Style/HashSyntax:
+#   Enabled: true
+# Style/StringLiterals:
+#   Enabled: true
+#   EnforcedStyle: "double_quotes"
+#   Exclude:
+#     - "config/**/*.rb"
+#     - Rakefile
+# Style/CaseEquality:
+#   Enabled: true
+# Style/ClassMethods:
+#   Enabled: true
+# Style/ClassVars:
+#   Enabled: true
+# Style/CollectionMethods:
+#   Enabled: true
+#   PreferredMethods:
+#     collect: "map"
+#     collect!: "map!"
+#     inject: "reduce"
+#     detect: "find"
+#     find_all: "select"

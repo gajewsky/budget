@@ -1,3 +1,0 @@
-set :stage, :production
-
-server ENV['CALINCOME_SERVER'], user: ENV['CALINCOME_USER'], roles: %w{web db app}
