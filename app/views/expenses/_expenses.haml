@@ -1,0 +1,27 @@
+.box-body.table-responsive.no-padding
+  %table.table.table-sm.table-hover
+    %thead
+      %tr
+        %th User
+        %th
+        %th Subcategory
+        %th Description
+        %th Tags
+        %th Contractor
+        %th Date
+        %th Value
+        %th
+    %tbody
+      - expenses.each do |expense|
+        %tr
+          %td= image_tag(expense.user.avatar || 'no-avatar.jpg', height: '22', width: '22', class: 'img-circle')
+          %td= "\u2713" if expense.to_divide
+          %td= link_to category_label(expense.subcategory), subcategory_path(expense.subcategory)
+          %td= truncate(expense.description, length: 60)
+          %td= raw expense.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')
+          %td= link_to expense.contractor.name, contractor_path(expense.contractor) if expense.contractor
+          %td= l expense.operation_date, format: '%d-%m-%y'
+          %td= number_to_currency(expense.value, unit: 'zł', format: '%n %u')
+          %td
+            = link_to edit_bill_path(expense.bill), class: 'btn btn-xs btn-warning',title: 'Edit', rel: 'tooltip' do
+              %i.fa.fa-pencil-square-o

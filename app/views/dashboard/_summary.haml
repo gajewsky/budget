@@ -1,0 +1,4 @@
+= render partial: 'sum_boxes', locals: { income: sum_values(incomes), spent: sum_values(expenses),  average_spent_per_day: average_spent_per_day }
+
+= render partial: 'dashboard/charts/expenses_pie_chart', locals: { expenses: expenses }
+= render partial: 'dashboard/charts/line_and_columns_chart', locals: { data_hash: expenses_by_day }

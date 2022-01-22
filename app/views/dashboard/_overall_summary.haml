@@ -1,0 +1,13 @@
+= render partial: 'sum_boxes', locals: { income: sum_values(incomes), spent: sum_values(expenses),  average_spent_per_day: average_spent_per_day }
+
+.box.box-primary
+  .box-header.with-border
+    %h3.box-title Balance
+    .box-tools.pull-right
+      %button.btn.btn-box-tool{ data: { widget: 'collapse' }, type: 'button' }
+        %i.fa.fa-minus
+      %button.btn.btn-box-tool{ data: { widget: 'remove' }, type: 'button' }
+        %i.fa.fa-times
+  .box-body
+    .chart
+      = column_chart expenses_vs_incomes(expenses, incomes)
