@@ -20,18 +20,12 @@ gem "image_processing", "~> 1.2"
 
 gem 'acts-as-taggable-on'
 gem 'aws-sdk-s3', require: false
-gem 'bootstrap-sass'
-gem 'bootstrap-sass-extras'
 gem "brakeman"
 gem "bundler-audit"
-gem 'chartkick'
-gem 'cocoon'
 gem 'devise'
 gem 'faker'
-gem 'font-awesome-sass'
 gem 'groupdate'
 gem 'haml-rails'
-gem 'jquery-rails'
 gem 'jsbundling-rails'
 gem 'cssbundling-rails'
 gem 'kaminari'
@@ -45,15 +39,6 @@ gem "rubocop-rails"
 gem 'simple_form'
 gem 'smarter_csv'
 gem 'validates_formatting_of'
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-adminlte'
-  gem 'rails-assets-bootstrap-daterangepicker'
-  gem 'rails-assets-bootstrap-tokenfield'
-  gem 'rails-assets-highcharts'
-  gem 'rails-assets-jquery-ui'
-  gem 'rails-assets-moment'
-end
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

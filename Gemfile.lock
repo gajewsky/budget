@@ -1,22 +1,4 @@
 GEM
-  remote: https://rails-assets.org/
-  specs:
-    rails-assets-adminlte (2.3.11)
-    rails-assets-bootstrap (3.1.1)
-      rails-assets-jquery (>= 1.9.0)
-    rails-assets-bootstrap-daterangepicker (3.0.5)
-      rails-assets-jquery (>= 1.9.1, < 4)
-      rails-assets-moment (>= 2.9.0)
-    rails-assets-bootstrap-tokenfield (0.12.1)
-      rails-assets-bootstrap (~> 3.1.1)
-      rails-assets-jquery (~> 2.1.0)
-    rails-assets-highcharts (9.3.2)
-    rails-assets-jquery (2.1.4)
-    rails-assets-jquery-ui (1.12.1)
-      rails-assets-jquery (>= 1.6)
-    rails-assets-moment (2.29.1)
-
-GEM
   remote: https://rubygems.org/
   specs:
     actioncable (7.0.1)
@@ -87,8 +69,6 @@ GEM
     acts-as-taggable-on (9.0.1)
       activerecord (>= 6.0, < 7.1)
     ast (2.4.2)
-    autoprefixer-rails (10.4.2.0)
-      execjs (~> 2)
     aws-eventstream (1.2.0)
     aws-partitions (1.549.0)
     aws-sdk-core (3.125.5)
@@ -109,11 +89,6 @@ GEM
     bindex (0.8.1)
     bootsnap (1.10.2)
       msgpack (~> 1.2)
-    bootstrap-sass (3.4.1)
-      autoprefixer-rails (>= 5.2.1)
-      sassc (>= 2.0.0)
-    bootstrap-sass-extras (0.1.0)
-      rails (>= 3.1.0)
     brakeman (5.2.0)
     builder (3.2.4)
     bundler-audit (0.9.0.1)
@@ -139,7 +114,6 @@ GEM
     digest (3.1.0)
     erubi (1.10.0)
     erubis (2.7.0)
-    execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -345,7 +319,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    selectize-rails (0.12.6)
     sexp_processor (4.16.0)
     simple_form (5.1.0)
       actionpack (>= 5.2)
@@ -395,8 +368,6 @@ DEPENDENCIES
   acts-as-taggable-on
   aws-sdk-s3
   bootsnap
-  bootstrap-sass
-  bootstrap-sass-extras
   brakeman
   bundler-audit
   chartkick
@@ -425,12 +396,6 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler
   rails (~> 7.0.0)
-  rails-assets-adminlte!
-  rails-assets-bootstrap-daterangepicker!
-  rails-assets-bootstrap-tokenfield!
-  rails-assets-highcharts!
-  rails-assets-jquery-ui!
-  rails-assets-moment!
   rails_12factor
   redis (~> 4.0)
   rollbar
@@ -438,7 +403,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   sassc-rails (~> 2.1)
-  selectize-rails
   simple_form
   smarter_csv
   stimulus-rails
