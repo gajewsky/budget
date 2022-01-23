@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = minimal_form_for @bill do |bill|
+    = simple_form_for @bill do |bill|
       = bill.error_notification
       .form-group
         .input-group
@@ -30,18 +30,6 @@
         %br
         = bill.simple_fields_for :expenses do |expense|
           = render 'expense_fields', f: expense
-        .links
-          %br
-          = link_to_add_association bill, :expenses do
-            %span.pull-right
-              %i.fa.fa-plus.fa-2x.pull-right
-          %br
       %br
       = bill.submit nil, class: 'btn btn-primary'
       = link_to 'cancel', bills_path, class: 'btn btn-default'
-
-:javascript
-  jQuery( document ).ready(function( $ ) {
-    $('.datepicker').datepicker({ firstDay: 1, autoclose: true, dateFormat: 'yy-mm-dd' });
-    $('.contractor-selectize').selectize();
-  });

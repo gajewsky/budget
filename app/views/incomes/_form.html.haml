@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = minimal_form_for @income do |f|
+    = simple_form_for @income do |f|
       = f.error_notification
       .form-group
         .input-group.date
@@ -23,7 +23,3 @@
           = f.input :description, as: :text
       = f.button :submit, class: 'btn btn-primary'
       = link_to 'cancel', incomes_path, class: 'btn btn-default'
-:javascript
-  jQuery( document ).ready(function( $ ) {
-    $('.datepicker').datepicker({ firstDay: 1, autoclose: true, dateFormat: 'yy-mm-dd' });
-  });

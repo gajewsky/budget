@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = minimal_form_for @contractor, html: { class: 'form-model' } do |contractor|
+    = simple_form_for @contractor, html: { class: 'form-model' } do |contractor|
       = contractor.error_notification
       .box.box-primary
         .box-body

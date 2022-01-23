@@ -37,4 +37,8 @@ module ApplicationHelper
     when 'alert' then 'alert alert-error'
     end
   end
+
+  def category_label(subcategory)
+    "#{subcategory&.category&.title}/#{subcategory&.title}"
+  end
 end

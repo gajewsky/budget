@@ -21,12 +21,12 @@ gem 'acts-as-taggable-on'
 gem 'aws-sdk-s3', require: false
 gem "brakeman"
 gem "bundler-audit"
+gem 'cssbundling-rails'
 gem 'devise'
 gem 'faker'
 gem 'groupdate'
 gem 'haml-rails'
 gem 'jsbundling-rails'
-gem 'cssbundling-rails'
 gem 'kaminari'
 gem "net-imap"
 gem "net-pop"

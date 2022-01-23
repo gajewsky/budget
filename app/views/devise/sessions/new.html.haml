@@ -18,12 +18,3 @@
                 = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
           .col-xs-4
             = f.button :submit, 'Sign In', class: 'btn btn-primary btn-block btn-flat'
-
-:javascript
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });

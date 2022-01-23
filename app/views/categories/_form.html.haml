@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = minimal_form_for @category, html: { class: 'form-model' } do |category|
+    = simple_form_for @category, html: { class: 'form-model' } do |category|
       = category.error_notification
       .box.box-primary
         .box-body
@@ -13,10 +13,6 @@
               %br
               = category.simple_fields_for :subcategories do |subcategory|
                 = render 'subcategory_fields', f: subcategory
-              .links
-                %br
-                = link_to_add_association 'Add subcategory', category, :subcategories
-                %br
             %br
             = category.submit nil, class: 'btn btn-primary'
             = link_to 'cancel', categories_path, class: 'btn btn-default'
