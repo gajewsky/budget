@@ -1,0 +1,24 @@
+.row
+  .col-md-8
+    - if category.errors.any?
+      - category.errors.full_messages.each do |message|
+        %span.alert-danger= message
+
+    = form_with(model: category) do |f|
+      .card
+        .card-body
+          .mb-3
+            = f.text_field :title, class: "form-control", placeholder: "Title"
+          .mb-3
+            = f.text_area :description, class: "form-control", placeholder: "Desc"
+          .mb-3
+            = f.collection_select :kind, Category.kinds.keys, :to_s, :to_s, {}, { class: "form-select", placeholder: "Kind" }    
+          .mb-3
+            = f.fields_for :subcategories do |subcategory|
+              .mb-3
+                = subcategory.text_field :title, class: "form-control", placeholder: "Title"
+              .mb-3
+                = subcategory.text_area :description, class: "form-control", placeholder: "Desc"
+
+          = f.submit "Submit", class: "btn btn-primary"
+

@@ -8,7 +8,6 @@ class Income < ApplicationRecord
   belongs_to :user
   validates :value, presence: true
   validates :operation_date, presence: true
-  validates :subcategory, presence: true
 
   def self.group_by_subcategory(incomes = Income.all)
     incomes.group_by(&:subcategory).map do |subcategory, subincomes|

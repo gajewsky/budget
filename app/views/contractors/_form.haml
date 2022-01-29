@@ -1,0 +1,22 @@
+.row
+  .col-md-8
+    - if contractor.errors.any?
+      - contractor.errors.full_messages.each do |message|
+        %span.alert-danger= message
+
+    = form_with(model: contractor) do |f|
+      .card
+        .card-body
+          .mb-3
+            = f.text_field :name, class: "form-control", placeholder: "Title"
+          .mb-3
+            = f.text_area :description, class: "form-control", placeholder: "Desc"
+          .mb-3
+            = f.collection_select :subcategory_id, Subcategory.where(category: Category.expense), :id, :label, {}, { class: "form-select", placeholder: "Site Name" }
+          .mb-3
+            = f.text_field :card_info, class: "form-control", placeholder: "Card info"
+          .mb-3
+            = f.text_field :revolut_id, class: "form-control", placeholder: "Revolut id"
+
+          = f.submit "Submit", class: "btn btn-primary"
+

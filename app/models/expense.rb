@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Expense < ApplicationRecord
   include PgSearch::Model
   include Rangable
@@ -10,7 +12,6 @@ class Expense < ApplicationRecord
   belongs_to :user
   belongs_to :contractor
   validates :value, presence: true
-  validates :subcategory, presence: true
 
   scope :trackable, -> { where(track: true) }
 

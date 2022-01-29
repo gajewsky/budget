@@ -1,0 +1,27 @@
+.container
+  %section.content-header
+    %h1
+      = number_to_currency(income.value, unit: 'zł', format: "%n %u")
+      %small= income.description
+  %section.content
+    .row
+      .col-xs-6
+        .table-responsive
+          %table.table
+            %tr
+              %th{ style: "width:50%" } Category:
+              %td= income.subcategory.label
+            %tr
+              %th Income Date:
+              %td= l income.operation_date
+            %tr
+              %th Added:
+              %td= l income.created_at
+            %tr
+              %th User:
+              %td= income.user.email
+    .page-footer
+      .text-center
+        = link_to 'back', incomes_path, class: 'btn btn-default'
+        = link_to 'edit', edit_income_path(income), class: 'btn btn-default'
+        = link_to 'destroy', income_path(income), method: 'delete', data: { confirm: 'Are you sure?'}, class: 'btn btn-danger'                                                                                   |

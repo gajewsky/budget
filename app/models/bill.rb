@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bill < ApplicationRecord
   include Rangable
   paginates_per 50

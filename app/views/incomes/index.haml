@@ -1,0 +1,23 @@
+
+%h2
+  Incomes
+  %small= number_to_pln(total_value)
+  %small.pull-right
+    by day:
+    = pln_per_day(total_value)
+  %small.pull-right
+    by month:
+    = pln_per_month(total_value)
+  = link_to new_income_path do
+    %i.fa.fa-plus-square-o
+.pull-right
+  .text-center
+    = link_to incomes_path(users: current_user.id, tag: params['tag']), class: 'btn btn-flat' do
+      Only you
+    |
+    = link_to incomes_path(tag: params['tag']), class: 'btn  btn-flat' do
+      All
+  .row
+    = render partial: 'incomes', locals: { incomes: }
+  .text-center
+    = paginate incomes

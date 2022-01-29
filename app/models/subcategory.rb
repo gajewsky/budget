@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Model representing single income/expense subcategory
 class Subcategory < ApplicationRecord
   validates :title, presence: true

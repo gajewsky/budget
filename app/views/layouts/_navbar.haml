@@ -2,14 +2,14 @@
   %nav.navbar.navbar-expand-lg.navbar-dark.d-flex.justify-content-evenly
     %ul.navbar-nav.mt-3
       %li.nav-item
-        = link_to 'Dashboard', dashboard_index_path, class: "nav-link #{class_names(active: current_page?(dashboard_index_path))}"
+        = link_to 'Dashboard', expenses_path, class: "nav-link disabled"
       %li.nav-item
         = link_to 'Incomes', incomes_path, class: "nav-link #{class_names(active: current_page?(incomes_path))}"
       %li.nav-item
-        = link_to 'Expenses', expenses_path, class: "nav-link #{class_names(active: current_page?(expenses_path))}"
+        = link_to 'Expenses', bills_path, class: "nav-link #{class_names(active: current_page?(bills_path))}"
       %li.nav-item
         = link_to 'Savings', expenses_path, class: "nav-link disabled"
       %li.nav-item
         = link_to 'Categories', categories_path, class: "nav-link #{class_names(active: current_page?(categories_path))}"
       %li.nav-item
-        = link_to 'Warranty', expenses_path, class: "nav-link disabled"
+        = link_to 'Warranty', warranty_path, class: "nav-link #{class_names(active: current_page?(warranty_path))}"

@@ -1,0 +1,28 @@
+%section.content-header
+  %h1
+    Bills
+    %small= number_to_pln(total_value)
+    %small.pull-right
+      by day:
+      = pln_per_day(total_value)
+    %small.pull-right
+      by month:
+      = pln_per_month(total_value)
+    = link_to new_bill_path do
+      %i.fa.fa-plus-square-o
+.pull-right
+  .text-center
+    = link_to bills_path(users: current_user.id, tag: params['tag']), class: 'btn btn-flat' do
+      Only you
+    |
+    = link_to bills_path(tag: params['tag'], dividable: true), class: 'btn  btn-flat' do
+      Dividable
+    |
+    = link_to bills_path(tag: params['tag']), class: 'btn  btn-flat' do
+      All
+
+%section.content
+  .row
+    = render partial: 'bills', locals: { bills: }
+  .text-center
+    = paginate bills

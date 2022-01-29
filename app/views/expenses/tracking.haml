@@ -15,7 +15,7 @@
             %th Daily cost
             %th
         %tbody
-          - @trackings.each do |expense|
+          - trackings.each do |expense|
             - daily_cost = cost_per_day(expense.value, expense.operation_date)
             %tr
               %td= image_tag(expense.user.avatar || 'no-avatar.jpg', height: '22', width: '22', class: 'img-circle')
