@@ -3,9 +3,10 @@
 # Bills Controller
 class BillsController < ApplicationController
   def index
-    total_value = bills.map(&:value).reduce(:+)
+    pagination, bills = pagy(filtered_bills, items: 20)
+    total_value = filtered_bills.map(&:value).reduce(:+)
 
-    render locals: { bills: bills.page(params[:page]), total_value: }
+    render locals: { bills:, pagination:, total_value: }
   end
 
   def new
@@ -44,8 +45,8 @@ class BillsController < ApplicationController
 
   private
 
-  def bills
-    @bills ||= begin
+  def filtered_bills
+    @filtered_bills ||= begin
       bills = bills_with_relations.where user_id: user_ids
       bills = bills.tagged_with params[:tag] if params[:tag]
       bills = bills.dividable if params[:dividable]

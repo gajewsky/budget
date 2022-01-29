@@ -14,7 +14,8 @@
           %td= truncate(contractor.revolut_id, length: 30)
 
           %td.col-sm-1
-            = link_to edit_contractor_path(contractor), class: 'btn btn-xs btn-warning', title: 'Edit', rel: 'tooltip' do
-              %i.fa.fa-pencil-square-o
-            = link_to contractor_path(contractor), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', title: 'Remove', rel: 'tooltip' do
-              %i.fa.fa-trash
+            = link_to edit_contractor_path(contractor) do
+              %span.badge.rounded-pill.bg-warning Edit
+            = link_to contractor_path(contractor), method: :delete, data: { confirm: 'Are you sure?' } do
+              %span.badge.rounded-pill.bg-danger Remove
+  

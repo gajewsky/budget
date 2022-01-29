@@ -27,10 +27,9 @@
           %td.col-sm-4
             = bill.expenses.pluck(:description).reject(&:blank?).join(', ')
           %td.col-sm-2= raw bill.tag_list.uniq.map { |t| link_to t, tag_path(t) }.join(', ')
-          %td= l bill.operation_date
+          %td= l bill.operation_date, format: '%d-%m-%y'
           %td
-            = link_to edit_bill_path(bill), class: 'btn btn-xs btn-warning', title: 'Edit', rel: 'tooltip' do
-              %i.fa.fa-pencil-square-o
-            = link_to bill_path(bill), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', title: 'Remove', rel: 'tooltip' do
-              %i.fa.fa-trash
-
+            = link_to edit_bill_path(bill) do
+              %span.badge.rounded-pill.bg-warning Edit
+            = link_to bill_path(bill), method: :delete, data: { confirm: 'Are you sure?' } do
+              %span.badge.rounded-pill.bg-danger Remove

@@ -3,9 +3,9 @@
 # Categories Controller
 class CategoriesController < ApplicationController
   def index
-    categories = Category.includes(:subcategories)
+    pagination, categories = pagy(filtered_categories, items: 20)
 
-    render locals: { categories: }
+    render locals: { categories:, pagination: }
   end
 
   def new
@@ -43,6 +43,10 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def filtered_categories
+    @filtered_categories ||= Category.includes(:subcategories)
+  end
 
   def category
     @category ||= Category.find(params[:id])

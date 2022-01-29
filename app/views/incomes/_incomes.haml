@@ -14,10 +14,10 @@
           %td= image_tag(income.user.avatar || 'no-avatar.jpg', height: '22', width: '22', class: 'img-circle')
           %td= link_to category_label(income.subcategory), subcategory_path(income.subcategory)
           %td= truncate(income.description, length: 60)
-          %td= l income.operation_date, format: '%d-%m'
+          %td= l income.operation_date, format: '%d-%m-%y'
           %td= link_to number_to_currency(income.value, unit: 'zł', format: '%n %u'), income_path(income)
           %td
-            = link_to edit_income_path(income), class: 'btn btn-xs btn-warning',title: 'Edit', rel: 'tooltip' do
-              %i.fa.fa-pencil-square-o
-            = link_to income_path(income), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', title: 'Remove', rel: 'tooltip' do
-              %i.fa.fa-trash
+            = link_to edit_income_path(income) do
+              %span.badge.rounded-pill.bg-warning Edit
+            = link_to income_path(income), method: :delete, data: { confirm: 'Are you sure?' } do
+              %span.badge.rounded-pill.bg-danger Remove

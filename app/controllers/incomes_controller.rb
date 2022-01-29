@@ -2,14 +2,10 @@
 
 class IncomesController < ApplicationController
   def index
-    incomes = Income.includes(:user, subcategory: :category)
-      .where(user_id: user_ids)
-      .reorder('operation_date DESC')
-      .page(params[:page])
+    pagination, incomes = pagy(filtered_incomes, items: 20)
+    total_value = filtered_incomes.map(&:value).reduce(:+)
 
-    total_value = incomes.map(&:value).reduce(:+)
-
-    render locals: { incomes:, total_value: }
+    render locals: { incomes:, total_value:, pagination: }
   end
 
   def new
@@ -47,6 +43,14 @@ class IncomesController < ApplicationController
   end
 
   private
+
+  def filtered_incomes
+    @filtered_incomes ||= 
+      Income.includes(:user, subcategory: :category)
+        .where(user_id: user_ids)
+        .reorder('operation_date DESC')
+  end
+     
 
   def income
     @income ||= Income.find params[:id]

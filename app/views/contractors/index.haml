@@ -1,10 +1,9 @@
-.container
-  %section.content-header
-    %h1
-      Contractors
-      = link_to new_contractor_path do
-        %i.fa.fa-plus-square-o
-  %section.content
-    .container
-      .row
-        = render partial: 'contractors', locals: { contractors: }
+%section.content-header
+  Contractors
+  = link_to new_contractor_path do
+    %i.fa.fa-plus-square-o
+%section.content
+  .row
+    = render partial: 'contractors', locals: { contractors: }
+.text-center
+  != pagy_bootstrap_nav(pagination)    

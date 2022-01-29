@@ -23,5 +23,5 @@
           %td= l expense.operation_date, format: '%d-%m-%y'
           %td= number_to_currency(expense.value, unit: 'zł', format: '%n %u')
           %td
-            = link_to edit_bill_path(expense.bill), class: 'btn btn-xs btn-warning',title: 'Edit', rel: 'tooltip' do
-              %i.fa.fa-pencil-square-o
+            = link_to edit_bill_path(expense.bill) do
+               %span.badge.rounded-pill.bg-warning Edit

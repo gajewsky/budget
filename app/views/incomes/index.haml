@@ -19,5 +19,6 @@
       All
   .row
     = render partial: 'incomes', locals: { incomes: }
-  .text-center
-    = paginate incomes
+ 
+.text-center
+  != pagy_bootstrap_nav(pagination)

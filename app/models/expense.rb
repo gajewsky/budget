@@ -6,7 +6,6 @@ class Expense < ApplicationRecord
 
   before_validation :set_fields_from_bill
   acts_as_taggable
-  paginates_per 30
   belongs_to :bill
   belongs_to :subcategory
   belongs_to :user

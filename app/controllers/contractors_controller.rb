@@ -2,9 +2,9 @@
 
 class ContractorsController < ApplicationController
   def index
-    contractors = Contractor.order :name
+    pagination, contractors = pagy(filtered_contractors, items: 20)
 
-    render locals: { contractors: }
+    render locals: { contractors:, pagination: }
   end
 
   def new
@@ -49,6 +49,10 @@ class ContractorsController < ApplicationController
   end
 
   private
+
+  def filtered_contractors
+    @filtered_contractors ||= Contractor.order(:name)
+  end
 
   def contractor
     @contractor ||= Contractor.find params[:id]

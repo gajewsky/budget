@@ -2,10 +2,10 @@
 
 class ExpensesController < ApplicationController
   def index
-    total_value = expenses_with_relations.map(&:value).reduce(:+)
-    expenses = expenses_with_relations.page params[:page]
+    pagination, expenses = pagy(filtered_expenses, items: 20)
+    total_value = filtered_expenses.map(&:value).reduce(:+)
 
-    render locals: { total_value:, expenses: }
+    render locals: { total_value:, expenses:, pagination: }
   end
 
   def tracking
@@ -16,9 +16,11 @@ class ExpensesController < ApplicationController
 
   private
 
-  def expenses_with_relations
-    expenses = Expense.includes(:taggings, :user, subcategory: :category).reorder 'operation_date DESC'
+  def filtered_expenses
+    @filtered_expenses ||= begin
+      expenses = Expense.includes(:taggings, :user, subcategory: :category).reorder 'operation_date DESC'
 
-    params[:q] ? expenses.search_by_description(params[:q]) : expenses
+      params[:q] ? expenses.search_by_description(params[:q]) : expenses
+    end
   end
 end
