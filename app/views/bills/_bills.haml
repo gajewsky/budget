@@ -26,7 +26,7 @@
                   = link_to category_label(subcategory), subcategory_path(subcategory)
           %td.col-sm-4
             = bill.expenses.pluck(:description).reject(&:blank?).join(', ')
-          %td.col-sm-2= raw bill.tag_list.uniq.map { |t| link_to t, tag_path(t) }.join(', ')
+          %td.col-sm-2= raw bill.tag_list.uniq
           %td= l bill.operation_date, format: '%d-%m-%y'
           %td
             = link_to edit_bill_path(bill) do
