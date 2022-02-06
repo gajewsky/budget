@@ -2,7 +2,7 @@
 
 class Income < ApplicationRecord
   include Rangable
-  
+
   before_validation :set_operation_date
   belongs_to :subcategory
   belongs_to :user

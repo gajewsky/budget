@@ -45,12 +45,8 @@ class IncomesController < ApplicationController
   private
 
   def filtered_incomes
-    @filtered_incomes ||= 
-      Income.includes(:user, subcategory: :category)
-        .where(user_id: user_ids)
-        .reorder('operation_date DESC')
+    @filtered_incomes ||= Income.includes(:user, subcategory: :category).where(user_id: user_ids).reorder('operation_date DESC')
   end
-     
 
   def income
     @income ||= Income.find params[:id]

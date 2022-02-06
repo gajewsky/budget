@@ -2,7 +2,7 @@
 
 class Bill < ApplicationRecord
   include Rangable
-  
+
   belongs_to :user
   belongs_to :contractor
   has_many :expenses, dependent: :destroy

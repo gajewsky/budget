@@ -17,10 +17,11 @@ class ExpensesController < ApplicationController
   private
 
   def filtered_expenses
-    @filtered_expenses ||= begin
-      expenses = Expense.includes(:taggings, :user, subcategory: :category).reorder 'operation_date DESC'
+    @filtered_expenses ||=
+      begin
+        expenses = Expense.includes(:taggings, :user, subcategory: :category).reorder 'operation_date DESC'
 
-      params[:q] ? expenses.search_by_description(params[:q]) : expenses
-    end
+        params[:q] ? expenses.search_by_description(params[:q]) : expenses
+      end
   end
 end

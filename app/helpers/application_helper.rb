@@ -3,7 +3,7 @@
 # Bunch of view helper methods used both in incomes and expenses
 module ApplicationHelper
   include Pagy::Frontend
-  
+
   BUDGET_START_DATE = '2016-09-01'.to_date
 
   def sum_values(valuable)
