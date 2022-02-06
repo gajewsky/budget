@@ -1,17 +1,19 @@
 version: "2.1"
 orbs:
   node: circleci/node@5.0.0
-  ruby: circleci/ruby@1.2.0
+  ruby: circleci/ruby@1.4.0
 executors:
   default:
     docker:
-      - image: cimg/ruby:3.1.0
+      - image: cimg/ruby:3.1-node
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:13
         environment:
-          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_USER: calincome
           POSTGRES_DB: calincome_test
+          POSTGRES_HOST_AUTH_METHOD: trust
+
       - image: redis
 
 commands:
@@ -24,21 +26,18 @@ commands:
       - run: node --version || true
       - run: yarn --version || true
       - run: ls -la ~/ -d
-  install-node:
+  install-yarn:
     steps:
-      - node/install:
-          install-yarn: true
-          yarn-version: '1.22.17'
+      - node/install-packages:
+          pkg-manager: yarn
 
 jobs:
   eslint:
     executor: default
     steps:
       - checkout
-      - install-node
-      - node/install-packages:
-          pkg-manager: yarn
-      - run: yarn run eslint
+      - install-yarn
+      - run: yarn run eslint app/javascript
 
   rubocop:
     executor: default
@@ -49,15 +48,20 @@ jobs:
 
   rspec:
     executor: default
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      PGHOST: 127.0.0.1
+      PGPASSWORD: ''
+      PGUSER: calincome
+      RAILS_ENV: test
+    parallelism: 3
     steps:
       - checkout
-      - install-node
+      - install-yarn
       - ruby/install-deps
-
-      # rails
-      - run: cp .env.example .env
-      - run: bundle exec rake db:setup
-
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run: bundle exec rails db:schema:load --trace
 
 workflows:
   default:

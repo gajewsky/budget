@@ -1,2 +1,2 @@
-import * as bootstrap from "bootstrap"
-import "./controllers"
+import * as bootstrap from 'bootstrap' // eslint-disable-line
+import './controllers'
