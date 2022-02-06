@@ -1,0 +1,67 @@
+version: "2.1"
+orbs:
+  node: circleci/node@5.0.0
+  ruby: circleci/ruby@1.2.0
+executors:
+  default:
+    docker:
+      - image: cimg/ruby:3.1.0
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:13
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: calincome_test
+      - image: redis
+
+commands:
+  debug:
+    steps:
+      - run: ruby --version || true
+      - run: python --version || true
+      - run: python2 --version || true
+      - run: python3 --version || true
+      - run: node --version || true
+      - run: yarn --version || true
+      - run: ls -la ~/ -d
+  install-node:
+    steps:
+      - node/install:
+          install-yarn: true
+          yarn-version: '1.22.17'
+
+jobs:
+  eslint:
+    executor: default
+    steps:
+      - checkout
+      - install-node
+      - node/install-packages:
+          pkg-manager: yarn
+      - run: yarn run eslint
+
+  rubocop:
+    executor: default
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rubocop-check
+
+  rspec:
+    executor: default
+    steps:
+      - checkout
+      - install-node
+      - ruby/install-deps
+
+      # rails
+      - run: cp .env.example .env
+      - run: bundle exec rake db:setup
+
+
+workflows:
+  default:
+    jobs:
+      - eslint
+      - rubocop
+      - rspec
