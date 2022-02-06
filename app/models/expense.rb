@@ -1,17 +1,16 @@
-# Model representing single expense
+# frozen_string_literal: true
+
 class Expense < ApplicationRecord
   include PgSearch::Model
   include Rangable
 
   before_validation :set_fields_from_bill
   acts_as_taggable
-  paginates_per 30
   belongs_to :bill
   belongs_to :subcategory
   belongs_to :user
   belongs_to :contractor
   validates :value, presence: true
-  validates :subcategory, presence: true
 
   scope :trackable, -> { where(track: true) }
 

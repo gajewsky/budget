@@ -1,3 +1,6 @@
-ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../gems.rb', __dir__)
+# frozen_string_literal: true
 
-require 'bundler/setup' # Set up gems listed in the Gemfile.
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path '../Gemfile', __dir__
+
+require 'bundler/setup'
+require 'bootsnap/setup'

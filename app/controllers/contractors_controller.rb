@@ -1,60 +1,68 @@
-class ContractorsController < ApplicationController
-  before_action :set_contractor, only: %i[show edit update destroy]
+# frozen_string_literal: true
 
+class ContractorsController < ApplicationController
   def index
-    @contractors = Contractor.order(:name)
+    pagination, contractors = pagy(filtered_contractors, items: 20)
+
+    render locals: { contractors:, pagination: }
   end
 
   def new
-    @contractor = Contractor.new
+    contractor = Contractor.new
+
+    render locals: { contractor: }
   end
 
   def create
-    @contractor = Contractor.new(contractor_params)
+    contractor = Contractor.new contractor_params
 
-    if @contractor.save
+    if contractor.save
       redirect_to contractors_url, notice: 'Contractor was successfully created.'
     else
-      render :new
+      render :new, locals: { contractor: }
     end
   end
 
+  def edit
+    render locals: { contractor: }
+  end
+
   def update
-    if @contractor.update(contractor_params)
+    if contractor.update contractor_params
       redirect_to contractors_url, notice: 'Contractor was successfully updated.'
     else
-      render :edit
+      render :edit, locals: { contractor: }
     end
   end
 
   def show
-    @total_value = expenses.map(&:value).reduce(:+)
-    @paginated_bills = @contractor.bills.reorder('operation_date DESC').page(params[:page])
+    total_value = expenses.map(&:value).reduce(:+)
+    paginated_bills = contractor.bills.reorder('operation_date DESC').page params[:page]
+
+    render locals: { contractor:, total_value:, paginated_bills: }
   end
 
   def destroy
-    @contractor.destroy
+    contractor.destroy!
 
     redirect_to contractors_url, notice: 'Contractor was successfully destroyed.'
   end
 
   private
 
-  def set_contractor
-    @contractor = Contractor.find(params[:id])
+  def filtered_contractors
+    @filtered_contractors ||= Contractor.order(:name)
+  end
+
+  def contractor
+    @contractor ||= Contractor.find params[:id]
   end
 
   def contractor_params
-    params.require(:contractor).permit(
-      :name,
-      :subcategory_id,
-      :description,
-      :revolut_id,
-      :card_info
-    )
+    params.require(:contractor).permit :name, :subcategory_id, :description, :revolut_id, :card_info
   end
 
   def expenses
-    @expenses ||= @contractor.expenses.reorder('operation_date DESC')
+    @expenses ||= @contractor.expenses.reorder 'operation_date DESC'
   end
 end

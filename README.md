@@ -1,2 +1,6 @@
-[![CircleCI](https://circleci.com/gh/gajewsky/budget.svg?style=svg)](https://circleci.com/gh/gajewsky/budget)
-Dummy budget app for personal use.
+## Initial setup
+```
+cp .env.example .env
+docker-compose build
+docker-compose run web bin/rails db:setup
+```

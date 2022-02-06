@@ -1,0 +1,9 @@
+%section.content-header
+  Categories
+  = link_to new_category_path do
+    %i.fa.fa-plus-square-o
+%section.content
+  .row
+    = render partial: 'categories', locals: { categories: }
+.text-center
+  != pagy_bootstrap_nav(pagination)    

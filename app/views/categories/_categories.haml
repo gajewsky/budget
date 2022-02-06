@@ -12,11 +12,12 @@
           %td= category.title
           %td= category.description
           %td
-            %ul.list-inline
+            %ul.list-group.list-group-horizontal
               - category.subcategories.each do |subcategory|
-                %li= link_to subcategory.title, subcategory_path(subcategory)
+                %li.list-group-item= link_to subcategory.title, subcategory_path(subcategory)
           %td
-            = link_to edit_category_path(category), class: 'btn btn-xs btn-warning',title: 'Edit', rel: 'tooltip' do
-              %i.fa.fa-pencil-square-o
-            = link_to category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger', title: 'Remove', rel: 'tooltip' do
-              %i.fa.fa-trash
+            = link_to edit_category_path(category) do
+              %span.badge.rounded-pill.bg-warning Edit
+            = link_to category_path(category), method: :delete, data: { confirm: 'Are you sure?' } do
+              %span.badge.rounded-pill.bg-danger Remove
+      

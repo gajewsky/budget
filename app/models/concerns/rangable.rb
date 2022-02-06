@@ -1,4 +1,5 @@
-# Bunch of methods used both in incomes and expenses
+# frozen_string_literal: true
+
 module Rangable
   extend ActiveSupport::Concern
 

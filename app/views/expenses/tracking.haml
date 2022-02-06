@@ -1,0 +1,30 @@
+.container
+  %section.content-header
+    %h1
+      Trackin expenses
+    .box-body.table-responsive.no-padding
+      %table.table.table-sm.table-hover
+        %thead
+          %tr
+            %th
+            %th Description
+            %th Subcategory
+            %th Price
+            %th Date
+            %th Monthly cost
+            %th Daily cost
+            %th
+        %tbody
+          - trackings.each do |expense|
+            - daily_cost = cost_per_day(expense.value, expense.operation_date)
+            %tr
+              %td= image_tag(expense.user.avatar || 'no-avatar.jpg', height: '22', width: '22', class: 'img-circle')
+              %td= truncate(expense.description, length: 60)
+              %td= link_to category_label(expense.subcategory), subcategory_path(expense.subcategory)
+              %td= number_to_currency(expense.value, unit: 'zł', format: '%n %u')
+              %td= l expense.operation_date, format: '%d-%m-%y'
+              %td= number_to_currency(daily_cost * 30.5 , unit: 'zł', format: '%n %u')
+              %td= number_to_currency(daily_cost, unit: 'zł', format: '%n %u')
+              %td
+                = link_to edit_bill_path(expense.bill), class: 'btn btn-xs btn-warning',title: 'Edit', rel: 'tooltip' do
+                  %i.fa.fa-pencil-square-o

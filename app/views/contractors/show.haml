@@ -1,0 +1,29 @@
+.container
+  %section.content-header
+    %h1
+      = contractor.name
+      %small= contractor.description
+  %section.content
+    .page-footer
+      .text-center
+        = link_to 'back', contractors_path, class: 'btn btn-default'
+        = link_to 'edit', edit_contractor_path(contractor), class: 'btn btn-default'
+        = link_to 'destroy', contractor_path(contractor), method: 'delete', data: { confirm: 'Are you sure?'}, class: 'btn btn-danger'
+
+    %h2
+      Expenses
+      %small= number_to_pln(total_value)
+      %small.pull-right
+        by day:
+        = pln_per_day(total_value)
+      %small.pull-right
+        by month:
+        = pln_per_month(total_value)
+
+
+  %section.content
+    .container
+      .row
+        = render partial: 'bills/bills', locals: { bills: paginated_bills }
+      .text-center
+        = paginate paginated_bills

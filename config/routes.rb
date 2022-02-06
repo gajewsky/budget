@@ -1,11 +1,10 @@
-Rails.application.routes.draw do
-  get 'dashboard/index'
-  get 'dashboard/overall'
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   resources :expenses, only: %i[index]
   resources :bills, only: %i[edit index new create update destroy]
 
-  get 'tracking/', to: 'expenses#tracking'
+  get 'warranty/', to: 'expenses#tracking'
 
   resources :categories, only: %i[edit index new create update destroy]
 
@@ -17,14 +16,5 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: [:registrations]
 
-  as :user do
-    get 'users/edit' => 'devise/registrations#edit', as: 'edit_user_registration'
-    put 'users' => 'devise/registrations#update', as: 'user_registration'
-  end
-
   root 'bills#new'
-
-  resources :tags, except: :show
-
-  get 'tags/:tag', to: 'tags#index'
 end

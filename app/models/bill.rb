@@ -1,7 +1,7 @@
+# frozen_string_literal: true
+
 class Bill < ApplicationRecord
   include Rangable
-  paginates_per 50
-  has_one_attached :photo
 
   belongs_to :user
   belongs_to :contractor

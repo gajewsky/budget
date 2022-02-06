@@ -1,30 +1,18 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: budget_development
-
-  #username: budget
-
-  #password:
-
-  #host: localhost
-
-  #port: 5432
-
-  #schema_search_path: myapp,sharedapp,public
-
-  #min_messages: notice
+  database: calincome_development
 
 test:
   <<: *default
-  database: budget_test
+  database: calincome_test
 
 production:
   <<: *default
-  database: budget2_production
-  username: budget2
-  password: <%= ENV['BUDGET2_DATABASE_PASSWORD'] %>
+  database: calincome_production
+  username: calincome
+  password: <%= ENV["CALINCOME_DATABASE_PASSWORD"] %>
