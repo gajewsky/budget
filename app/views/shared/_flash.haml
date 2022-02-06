@@ -1,0 +1,4 @@
+= turbo_frame_tag 'flash', target: '_top' do
+  - flash.each do |key, value|
+    %div{:class => flash_class(key)}
+      = value
