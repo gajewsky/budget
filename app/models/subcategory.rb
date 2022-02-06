@@ -11,4 +11,6 @@ class Subcategory < ApplicationRecord
   def label
     "#{category&.title} / #{title}"
   end
+
+  scope :expanse, -> { where(category: Category.expense) }
 end

@@ -28,4 +28,4 @@
           by month:
           = pln_per_month(summed_expenses)
 
-      = render partial: 'bills/bills', locals: { bills: subcategory.bills.reorder('operation_date DESC') }
+      = render partial: 'bills/bills', locals: { bills:, pagination: }

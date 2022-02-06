@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Expense < ApplicationRecord
-  include PgSearch::Model
   include Rangable
 
   before_validation :set_fields_from_bill
@@ -13,8 +12,6 @@ class Expense < ApplicationRecord
   validates :value, presence: true
 
   scope :trackable, -> { where(track: true) }
-
-  pg_search_scope :search_by_description, against: :description
 
   def self.group_by_category(expenses = Expense.all)
     expenses.group_by(&:subcategory).group_by { |sub| sub.first.category }

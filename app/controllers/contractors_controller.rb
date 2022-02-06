@@ -36,10 +36,10 @@ class ContractorsController < ApplicationController
   end
 
   def show
-    total_value = expenses.map(&:value).reduce(:+)
-    paginated_bills = contractor.bills.reorder('operation_date DESC').page params[:page]
-
-    render locals: { contractor:, total_value:, paginated_bills: }
+    total_value = contractor.expenses.map(&:value).reduce(:+)
+    pagination, bills = pagy(contractor_bills, items: 20)
+   
+    render locals: { contractor:, total_value:, pagination:, bills: }
   end
 
   def destroy
@@ -58,11 +58,11 @@ class ContractorsController < ApplicationController
     @contractor ||= Contractor.find params[:id]
   end
 
-  def contractor_params
-    params.require(:contractor).permit :name, :subcategory_id, :description, :revolut_id, :card_info
+  def contractor_bills
+    contractor.bills.reorder('operation_date DESC')
   end
 
-  def expenses
-    @expenses ||= @contractor.expenses.reorder 'operation_date DESC'
+  def contractor_params
+    params.require(:contractor).permit :name, :subcategory_id, :description, :revolut_id, :card_info
   end
 end

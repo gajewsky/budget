@@ -95,7 +95,6 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.10.0)
-    erubis (2.7.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -108,20 +107,10 @@ GEM
       activesupport (>= 5.0)
     groupdate (6.0.1)
       activesupport (>= 5.2)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    hamlit (2.16.0)
+      temple (>= 0.8.2)
+      thor
       tilt
-    haml-rails (2.0.1)
-      actionpack (>= 5.1)
-      activesupport (>= 5.1)
-      haml (>= 4.0.6, < 6.0)
-      html2haml (>= 1.0.1)
-      railties (>= 5.1)
-    html2haml (2.2.0)
-      erubis (~> 2.7.0)
-      haml (>= 4.0, < 6)
-      nokogiri (>= 1.6.0)
-      ruby_parser (~> 3.5)
     i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.1)
@@ -271,8 +260,6 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
-    ruby_parser (3.18.1)
-      sexp_processor (~> 4.16)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -281,7 +268,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sexp_processor (4.16.0)
     smarter_csv (1.2.9)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -334,7 +320,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   groupdate
-  haml-rails
+  hamlit
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails

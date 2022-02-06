@@ -156,4 +156,6 @@ User.transaction do
   #       expenses: [expense]
   #     )
   #   end
+
+  puts "Yay, db seeded! admin@example.com:password"
 end

@@ -2,6 +2,7 @@
 
 class Bill < ApplicationRecord
   include Rangable
+  include PgSearch::Model
 
   belongs_to :user
   belongs_to :contractor
@@ -15,6 +16,10 @@ class Bill < ApplicationRecord
   scope :dividable, -> { where(to_divide: true) }
 
   accepts_nested_attributes_for :expenses, reject_if: :all_blank, allow_destroy: true
+
+  pg_search_scope :search_by_expense, 
+    using: { tsearch: { prefix: true } },
+    associated_against: { expenses: :description }
 
   def value
     expenses.flat_map(&:value).reduce(:+)

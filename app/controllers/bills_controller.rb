@@ -5,8 +5,11 @@ class BillsController < ApplicationController
   def index
     pagination, bills = pagy(filtered_bills, items: 20)
     total_value = filtered_bills.map(&:value).reduce(:+)
+    subcategories = Subcategory.expanse
+    contractors = Contractor.order(:name)
+    users = User.order(:email)
 
-    render locals: { bills:, pagination:, total_value: }
+    render locals: { bills:, pagination:, subcategories:, contractors:, users:, total_value: }
   end
 
   def new
@@ -46,17 +49,12 @@ class BillsController < ApplicationController
   private
 
   def filtered_bills
-    @filtered_bills ||= begin
-      bills = bills_with_relations.where user_id: user_ids
-      bills = bills.tagged_with params[:tag] if params[:tag]
-      bills = bills.dividable if params[:dividable]
-      bills.reorder 'operation_date DESC'
-    end
-  end
-
-  def bills_with_relations
-    bills = Bill.includes({ expenses: [{ subcategory: :category }, :taggings] }, :user, :contractor)
-    params[:q] ? bills.search_by_description(params[:q]) : bills
+    @filtered_bills ||= ::BillsFilter.call(
+      search: params[:search],
+      subcategory_id: params[:subcategory_id],
+      contractor_id: params[:contractor_id],
+      user_id: params[:user_id],
+    )
   end
 
   def bill

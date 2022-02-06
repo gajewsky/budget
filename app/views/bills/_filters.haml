@@ -1,0 +1,20 @@
+.shadow-lg.p-3.mb-5.bg-white.rounded-3
+  = form_with url: bills_path, method: :get, data: { controller: 'filters', filters_target: 'form', turbo_frame: 'bills' } do |f|
+    .row.justify-content-md-center
+      .col-md-8.p-2.mb-2
+        = f.text_field :search,
+          { class: 'form-control',
+            value: params[:search],
+            placeholder: "Search",
+            autocomplete: 'off',
+            autofocus: true,
+            data: { action: 'input->filters#search' } }
+    .row.justify-content-md-center
+      .col-md-8.p-2.mb-2
+        = f.collection_select :user_id, users, :id, :email, { include_blank: 'Select User'}, { class: "form-select", data: { action: 'input->filters#search' } }
+    .row.justify-content-md-center
+      .col-md-8.p-2.mb-2
+        = f.collection_select :contractor_id, contractors, :id, :name, { include_blank: 'Select Contractor'}, { class: "form-select", data: { action: 'input->filters#search' } }
+    .row.justify-content-md-center
+      .col-md-8.p-2.mb-2
+        = f.collection_select :subcategory_id, subcategories, :id, :label, { include_blank: 'Select Category'}, { class: "form-select", data: { action: 'input->filters#search' } }

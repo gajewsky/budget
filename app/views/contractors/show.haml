@@ -24,6 +24,4 @@
   %section.content
     .container
       .row
-        = render partial: 'bills/bills', locals: { bills: paginated_bills }
-      .text-center
-        = paginate paginated_bills
+        = render partial: 'bills/bills', locals: { bills:, pagination: }
