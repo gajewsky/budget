@@ -31,7 +31,7 @@
           %td
             = link_to edit_bill_path(bill) do
               %span.badge.rounded-pill.bg-warning Edit
-            = link_to bill_path(bill), method: :delete, data: { confirm: 'Are you sure?' } do
+            = link_to bill_path(bill), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} do
               %span.badge.rounded-pill.bg-danger Remove
 .text-center
   != pagy_bootstrap_nav(pagination)

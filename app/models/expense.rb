@@ -7,8 +7,6 @@ class Expense < ApplicationRecord
   acts_as_taggable
   belongs_to :bill
   belongs_to :subcategory
-  belongs_to :user
-  belongs_to :contractor
   validates :value, presence: true
 
   scope :trackable, -> { where(track: true) }
@@ -22,7 +20,6 @@ class Expense < ApplicationRecord
   def set_fields_from_bill
     return unless bill
 
-    self.contractor_id = bill.contractor_id
     self.user_id = bill.user_id
     self.operation_date = bill.operation_date
   end

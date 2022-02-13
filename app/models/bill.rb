@@ -5,10 +5,8 @@ class Bill < ApplicationRecord
   include PgSearch::Model
 
   belongs_to :user
-  belongs_to :contractor
+  belongs_to :contractor, optional: true
   has_many :expenses, dependent: :destroy
-
-  before_validation :set_operation_date
 
   validates :operation_date, presence: true
   validates :expenses, length: { minimum: 1 }
@@ -17,9 +15,7 @@ class Bill < ApplicationRecord
 
   accepts_nested_attributes_for :expenses, reject_if: :all_blank, allow_destroy: true
 
-  pg_search_scope :search_by_expense, 
-    using: { tsearch: { prefix: true } },
-    associated_against: { expenses: :description }
+  pg_search_scope :search_by_expense, using: { tsearch: { prefix: true } }, associated_against: { expenses: :description }
 
   def value
     expenses.flat_map(&:value).reduce(:+)

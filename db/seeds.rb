@@ -157,5 +157,5 @@ User.transaction do
   #     )
   #   end
 
-  puts "Yay, db seeded! admin@example.com:password"
+  Rails.logger.debug 'Yay, db seeded! admin@example.com:password'
 end

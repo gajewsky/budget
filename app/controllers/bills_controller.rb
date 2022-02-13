@@ -19,7 +19,7 @@ class BillsController < ApplicationController
   end
 
   def create
-    bill = Bill.new bill_params
+    bill = Bill.new bill_params.compact_blank
 
     if bill.save
       redirect_to new_bill_url, notice: 'Bill was successfully created.'
@@ -43,7 +43,7 @@ class BillsController < ApplicationController
   def destroy
     bill.destroy!
 
-    redirect_to bills_url, notice: 'Bill was successfully destroyed.'
+    redirect_to bills_url, status: :see_other, notice: 'Bill was successfully destroyed.'
   end
 
   private
@@ -53,7 +53,7 @@ class BillsController < ApplicationController
       search: params[:search],
       subcategory_id: params[:subcategory_id],
       contractor_id: params[:contractor_id],
-      user_id: params[:user_id],
+      user_id: params[:user_id]
     )
   end
 

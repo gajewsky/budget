@@ -38,7 +38,7 @@ class ContractorsController < ApplicationController
   def show
     total_value = contractor.expenses.map(&:value).reduce(:+)
     pagination, bills = pagy(contractor_bills, items: 20)
-   
+
     render locals: { contractor:, total_value:, pagination:, bills: }
   end
 
