@@ -22,7 +22,7 @@ gem 'net-smtp'
 gem 'pagy'
 gem 'pg', '~> 1.1'
 gem 'pg_search'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.6'
 gem 'rails', '~> 7.0.0'
 gem 'rails_12factor', group: :production
 gem 'redis', '~> 4.0'
