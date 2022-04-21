@@ -1,10 +1,11 @@
 .row
   .col-md-8
+    = render partial: "shared/flash"
     - if contractor.errors.any?
       - contractor.errors.full_messages.each do |message|
         %span.alert-danger= message
 
-    = form_with(model: contractor) do |f|
+    = form_with model: contractor, data: { 'turbo' => 'false'} do |f|
       .card
         .card-body
           .mb-3

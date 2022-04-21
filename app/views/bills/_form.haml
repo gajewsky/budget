@@ -1,10 +1,11 @@
 .row
   .col-md-8
+    = render partial: "shared/flash"
     - if bill.errors.any?
       - bill.errors.full_messages.each do |message|
         %span.alert-danger= message
 
-    = form_with(model: bill) do |f|
+    = form_with model: bill, data: { 'turbo' => 'false'} do |f|
       .card
         .card-body
           .mb-3
@@ -12,7 +13,7 @@
           .mb-3
             = f.date_field :operation_date, class: "form-control", placeholder: "Date"
           .mb-3
-            = f.collection_select :contractor_id, Contractor.all, :id, :name, {}, { class: "form-select", placeholder: "Contractor" }
+            = f.collection_select :contractor_id, Contractor.all, :id, :name, { include_blank: 'Select Contractor'}, { class: "form-select", placeholder: "Contractor" }
           .mb-3
             = f.fields_for :expenses do |expense|
               .mb-3
@@ -21,6 +22,6 @@
                 = expense.collection_select :subcategory_id, Subcategory.where(category: Category.expense), :id, :label, {}, { class: "form-select", placeholder: "Category" }
               .mb-3
                 = expense.text_area :description, class: "form-control", placeholder: "Description"
-                  
+
           = f.submit "Submit", class: "btn btn-primary"
 

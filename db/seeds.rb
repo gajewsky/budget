@@ -156,4 +156,6 @@ User.transaction do
   #       expenses: [expense]
   #     )
   #   end
+
+  Rails.logger.debug 'Yay, db seeded! admin@example.com:password'
 end
