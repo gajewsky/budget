@@ -17,11 +17,13 @@
           .mb-3
             = f.fields_for :expenses do |expense|
               .mb-3
-                = expense.number_field :value, class: "form-control", placeholder: "Value"
+                = expense.number_field :value, step: 0.01, class: "form-control", placeholder: "Value"
               .mb-3
                 = expense.collection_select :subcategory_id, Subcategory.where(category: Category.expense), :id, :label, {}, { class: "form-select", placeholder: "Category" }
               .mb-3
                 = expense.text_area :description, class: "form-control", placeholder: "Description"
+              .mb-3
+                = expense.text_field :tag_list, class: "form-control", placeholder: "Tags", input_html: { class: 'expense-tag-list' }
 
           = f.submit "Submit", class: "btn btn-primary"
 
