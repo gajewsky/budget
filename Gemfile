@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.0'
+ruby '3.1.2'
 gem 'acts-as-taggable-on'
 gem 'bootsnap', require: false
 gem 'brakeman'
@@ -23,7 +23,7 @@ gem 'pagy'
 gem 'pg', '~> 1.1'
 gem 'pg_search'
 gem 'puma', '~> 5.0'
-gem 'rails', '~> 7.0.0'
+gem 'rails', '~> 7.0.2.3'
 gem 'rails_12factor', group: :production
 gem 'redis', '~> 4.0'
 gem 'rollbar'
