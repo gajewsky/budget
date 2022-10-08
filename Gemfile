@@ -29,11 +29,12 @@ gem 'redis', '~> 4.0'
 gem 'rollbar'
 gem 'rubocop-rails'
 gem 'sassc-rails', '~> 2.1'
-gem 'smarter_csv'
+gem 'smarter_csv', '~> 1.7.2'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'validates_formatting_of'
+gem 'seed_dump'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
